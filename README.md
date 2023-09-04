@@ -19,3 +19,8 @@ ____________________________________________________________
 - Javascript;
 - CSS;
 - PHP.
+
+### Como executar o projeto:
+____________________________________________________________
+
+Basta baixar o reposiório e executar um servidor web, recomendo o wamp, pois é o mais fácil de executar, depois disso baixe o backend e execute a api com o comando node app.js.
