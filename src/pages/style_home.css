@@ -1,0 +1,78 @@
+.mt_custom {
+    margin-top: 109px;
+    height: 600px;
+}
+
+.row_custom {
+    margin-top: 55px;
+}
+
+.font-small {
+    font-size: 15px;
+    color: #A8A8B3;
+}
+
+.lines_custom {
+    padding-left: 14px;
+    margin-left: 9px;
+    font-size: 13px;
+    margin-right: 16px;
+}
+
+.linhas {
+    border-radius: 8px;
+}
+
+.mt_custom {
+    border-radius: 8px;
+}
+
+.titulo {
+    border-radius: 8px;
+}
+.subtitulo {
+    border-radius: 0px;
+}
+
+.btn-orcamento {
+    width: 100%;
+}
+
+.card-expandable {
+    max-height: 1000px;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+  }
+  
+.card-expanded {
+    max-height: none;
+    transition: max-height 0.3s ease-in-out;
+}
+  
+.table_custom {
+    width: 100%; 
+    border-collapse: collapse; 
+    margin: 0;
+}
+
+.table_custom1 {
+    border: none;
+    border-bottom: 1px solid #E1E1E1;
+    padding-bottom: 5px; 
+}
+
+.card1 {
+    border: none;
+}
+  
+.total {
+    border-top-right-radius: 0px;
+    border-top-left-radius: 0px;
+}
+
+.row_total {
+    border-top: 1px solid #E1E1E1;
+    padding-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}

@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabela com Cartões por Linha</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="style_home.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row row_custom">
+            <!-- Tabela Principal -->
+            <div class="col-md-9 container_" style="margin-top: 46px;">
+                <h1>ORÇAMENTO DE OBRAS</h1>                
+                <div class="card titulo mt-3">
+                    <div class="row">
+                        <div class="col">
+                            <div class="card-body">
+                                <h5 class="fw-bold font-small" style="margin-left: 30px; margin-top: 5px;">CATEGORIA</h5>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card-body">
+                                <h5 class="fw-bold font-small" style="margin-left: 5px; margin-top: 5px;">CÓDIGO</h5>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card-body">
+                                <h5 class="fw-bold font-small" style="margin-left: -34px; margin-top: 5px;">NÚMERO DE ITENS</h5>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card-body">
+                                <h5 class="fw-bold font-small" style="margin-top: 5px;">VALOR TOTAL</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card linhas mt-2">
+                    <div class="row categoria-info">
+                        <div class="col">
+                            <div class="card-body">
+                                <span class="greater-than-symbol" id = "categoria">> Materiais</span>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card-body">
+                                <p class="card-text">0005858</p>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card-body">
+                                <p class="card-text quantidade_total" style = "margin-left: 25px;">2</p>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card-body">
+                                <p class="card-text valorTotal">R$ 8.800,00</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container row tabela-oculta" style="display: none;">
+                        <div class="card linhas card1" style = "border-top: 1px solid #F2F2F2; border-radius: 0px;">
+                            <div class="row">
+                                <h6 style = "margin-top: 20px;">Subitens</h6>
+                            </div>
+                        </div>
+                        <div class="card subtitulo table_custom1">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="card-body">
+                                        <h8 class="fw-bold" style = "margin-left: 20px;">Nome</h8>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <h8 class="fw-bold" style = "margin-left: 20px;">Valor</h8>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <h8 class="fw-bold">Detalhes</h8>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <h8 class="fw-bold" style = "margin-left: 20px;">id</h8>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <h8 class="fw-bold" style = "margin-left: 5px;" id = "valorTotalSub">Valor total</h8>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <h8 class="fw-bold">Quantidade</h8>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card card1">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="card-body">
+                                        <p class="card-text">Tijolos</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <p class="card-text" id = "subValor">R$ 5.000,00</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <p class="card-text">Marca X Y Z</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <p class="card-text">4AB7YT</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <p class="card-text subValorTotal" id = "valorTotalSub_0">R$ 5.000,00</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body" style = "margin-left: 12px;">
+                                        <!-- Botões de incremento e decremento -->
+                                        <button onclick="decrementarQuantidade(this)" class="btn btn-sm btn-danger btn-decremento">-</button>
+                                        <span class="card-text" id="quantidade">1</span>
+                                        <button onclick="incrementarQuantidade(this)" class="btn btn-sm btn-success btn-incremento">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card card1">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="card-body">
+                                        <p class="card-text">Porcelanato</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <p class="card-text" id = "subValor">R$ 3.500,00</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <p class="card-text">Marca X Y Z</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <p class="card-text">4AB7YT</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <p class="card-text subValorTotal" id = "valorTotalSub_1">R$ 3.500,00</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body" style = "margin-left: 12px;">
+                                        <!-- Botões de incremento e decremento -->
+                                        <button onclick="decrementarQuantidade(this)" class="btn btn-sm btn-danger btn-decremento">-</button>
+                                        <span class="card-text" id="quantidade">1</span>
+                                        <button onclick="incrementarQuantidade(this)" class="btn btn-sm btn-success btn-incremento">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card linhas mt-2">
+                    <div class="row categoria-info">
+                        <div class="col">
+                            <div class="card-body">
+                                <span class="greater-than-symbol" id = "categoria">> Mão de obra</span>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card-body">
+                                <p class="card-text">0588236</p>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card-body">
+                                <p class="card-text quantidade_total" style = "margin-left: 25px;">2</p>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card-body">
+                                <p class="card-text valorTotal">R$ 18,800,00</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container row tabela-oculta" style="display: none;">
+                        <div class="card linhas card1" style = "border-top: 1px solid #F2F2F2; border-radius: 0px;">
+                            <div class="row">
+                                <h6 style = "margin-top: 20px;">Subitens</h6>
+                            </div>
+                        </div>
+                        <div class="card subtitulo table_custom1">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="card-body">
+                                        <h8 class="fw-bold" style = "margin-left: 20px;">Nome</h8>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <h8 class="fw-bold" style = "margin-left: 20px;">Valor</h8>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <h8 class="fw-bold">Detalhes</h8>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <h8 class="fw-bold" style = "margin-left: 20px;">id</h8>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <h8 class="fw-bold" style = "margin-left: 5px;" id = "valorTotalSub">Valor total</h8>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <h8 class="fw-bold">Quantidade</h8>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card linhas card1">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="card-body">
+                                        <p class="card-text">Pedreiro</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <p class="card-text" id = "subValor">R$ 12.000,00</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <p class="card-text">Marca X Y Z</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <p class="card-text">4AB7YT</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <p class="card-text subValorTotal" id = "valorTotalSub_0">R$ 12.000,00</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body" style = "margin-left: 12px;">
+                                        <!-- Botões de incremento e decremento -->
+                                        <button onclick="decrementarQuantidade(this)" class="btn btn-sm btn-danger btn-decremento">-</button>
+                                        <span class="card-text" id="quantidade">1</span>
+                                        <button onclick="incrementarQuantidade(this)" class="btn btn-sm btn-success btn-incremento">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card linhas card1">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="card-body">
+                                        <p class="card-text">Eletricista</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <p class="card-text" id = "subValor">R$ 6.800,00</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <p class="card-text">Marca X Y Z</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <p class="card-text">4AB7YT</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <p class="card-text subValorTotal" id = "valorTotalSub_1">R$ 6.800,00</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body" style = "margin-left: 12px;">
+                                        <!-- Botões de incremento e decremento -->
+                                        <button onclick="decrementarQuantidade(this)" class="btn btn-sm btn-danger btn-decremento">-</button>
+                                        <span class="card-text" id="quantidade">1</span>
+                                        <button onclick="incrementarQuantidade(this)" class="btn btn-sm btn-success btn-incremento">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card linhas mt-2">
+                    <div class="row categoria-info">
+                        <div class="col">
+                            <div class="card-body">
+                                <span class="greater-than-symbol" id = "categoria">> Equipamentos</span>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card-body">
+                                <p class="card-text">03124777</p>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card-body">
+                                <p class="card-text quantidade_total" style = "margin-left: 25px;">2</p>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card-body">
+                                <p class="card-text valorTotal">R$ 11.700,00</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container row tabela-oculta" style="display: none;">
+                        <div class="card linhas card1" style = "border-top: 1px solid #F2F2F2; border-radius: 0px;">
+                            <div class="row">
+                                <h6 style = "margin-top: 20px;">Subitens</h6>
+                            </div>
+                        </div>
+                        <div class="card subtitulo table_custom1">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="card-body">
+                                        <h8 class="fw-bold" style = "margin-left: 20px;">Nome</h8>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <h8 class="fw-bold" style = "margin-left: 20px;">Valor</h8>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <h8 class="fw-bold">Detalhes</h8>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <h8 class="fw-bold" style = "margin-left: 20px;">id</h8>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <h8 class="fw-bold" style = "margin-left: 5px;" id = "valorTotalSub">Valor total</h8>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <h8 class="fw-bold">Quantidade</h8>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card linhas card1">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="card-body">
+                                        <p class="card-text">Escavadeira</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <p class="card-text" id = "subValor">R$ 9.500,00</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <p class="card-text">Marca X Y Z</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <p class="card-text">4AB7YT</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <p class="card-text subValorTotal" id = "valorTotalSub_0">R$ 9.500,00</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body" style = "margin-left: 12px;">
+                                        <!-- Botões de incremento e decremento -->
+                                        <button onclick="decrementarQuantidade(this)" class="btn btn-sm btn-danger btn-decremento">-</button>
+                                        <span class="card-text" id="quantidade">1</span>
+                                        <button onclick="incrementarQuantidade(this)" class="btn btn-sm btn-success btn-incremento">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card linhas card1">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="card-body">
+                                        <p class="card-text">Betoneira</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <p class="card-text" id = "subValor">R$ 2.200,00</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <p class="card-text">Marca X Y Z</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <p class="card-text">4AB7YT</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <p class="card-text subValorTotal" id = "valorTotalSub_1">R$ 2.200,00</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body" style = "margin-left: 12px;">
+                                        <!-- Botões de incremento e decremento -->
+                                        <button onclick="decrementarQuantidade(this)" class="btn btn-sm btn-danger btn-decremento">-</button>
+                                        <span class="card-text" id="quantidade">1</span>
+                                        <button onclick="incrementarQuantidade(this)" class="btn btn-sm btn-success btn-incremento">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card linhas mt-2">
+                    <div class="row categoria-info">
+                        <div class="col">
+                            <div class="card-body">
+                                <span class="greater-than-symbol" id = "categoria">> Licenças e Taxas</span>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card-body">
+                                <p class="card-text">03124777</p>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card-body">
+                                <p class="card-text quantidade_total" style = "margin-left: 25px;">2</p>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card-body">
+                                <p class="card-text valorTotal">R$ 4.500,00</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container row tabela-oculta" style="display: none;">
+                        <div class="card linhas card1" style = "border-top: 1px solid #F2F2F2; border-radius: 0px;">
+                            <div class="row">
+                                <h6 style = "margin-top: 20px;">Subitens</h6>
+                            </div>
+                        </div>
+                        <div class="card subtitulo table_custom1">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="card-body">
+                                        <h8 class="fw-bold" style = "margin-left: 20px;">Nome</h8>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <h8 class="fw-bold" style = "margin-left: 20px;">Valor</h8>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <h8 class="fw-bold">Detalhes</h8>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <h8 class="fw-bold" style = "margin-left: 20px;">id</h8>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <h8 class="fw-bold" style = "margin-left: 5px;" id = "valorTotalSub">Valor total</h8>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <h8 class="fw-bold">Quantidade</h8>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card linhas card1">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="card-body">
+                                        <p class="card-text">Licença Ambiental</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <p class="card-text" id = "subValor">R$ 1.500,00</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <p class="card-text">Marca X Y Z</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <p class="card-text">4AB7YT</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <p class="card-text subValorTotal" id = "valorTotalSub_0">R$ 1.500,00</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body" style = "margin-left: 12px;">
+                                        <!-- Botões de incremento e decremento -->
+                                        <button onclick="decrementarQuantidade(this)" class="btn btn-sm btn-danger btn-decremento">-</button>
+                                        <span class="card-text" id="quantidade">1</span>
+                                        <button onclick="incrementarQuantidade(this)" class="btn btn-sm btn-success btn-incremento">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card linhas card1">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="card-body">
+                                        <p class="card-text">Taxa Municipal</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <p class="card-text" id = "subValor">R$ 3.000,00</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <p class="card-text">Marca X Y Z</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <p class="card-text">4AB7YT</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <p class="card-text subValorTotal" id = "valorTotalSub_1">R$ 3.000,00</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body" style = "margin-left: 12px;">
+                                        <!-- Botões de incremento e decremento -->
+                                        <button onclick="decrementarQuantidade(this)" class="btn btn-sm btn-danger btn-decremento">-</button>
+                                        <span class="card-text" id="quantidade">1</span>
+                                        <button onclick="incrementarQuantidade(this)" class="btn btn-sm btn-success btn-incremento">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card linhas mt-2">
+                    <div class="row categoria-info">
+                        <div class="col">
+                            <div class="card-body">
+                                <span class="greater-than-symbol" id = "categoria">> Tecnologia e Softwares</span>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card-body">
+                                <p class="card-text">03124777</p>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card-body">
+                                <p class="card-text quantidade_total" style = "margin-left: 25px;">3</p>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card-body">
+                                <p class="card-text valorTotal">R$ 77.700,00</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container row tabela-oculta" style="display: none;">
+                        <div class="card linhas card1" style = "border-top: 1px solid #F2F2F2; border-radius: 0px;">
+                            <div class="row">
+                                <h6 style = "margin-top: 20px;">Subitens</h6>
+                            </div>
+                        </div>
+                        <div class="card subtitulo table_custom1">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="card-body">
+                                        <h8 class="fw-bold" style = "margin-left: 20px;">Nome</h8>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <h8 class="fw-bold" style = "margin-left: 20px;">Valor</h8>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <h8 class="fw-bold">Detalhes</h8>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <h8 class="fw-bold" style = "margin-left: 20px;">id</h8>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <h8 class="fw-bold" style = "margin-left: 5px;" id = "valorTotalSub">Valor total</h8>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <h8 class="fw-bold">Quantidade</h8>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card linhas card1">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="card-body">
+                                        <p class="card-text">Concreto</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <p class="card-text" id = "subValor">R$ 25.900,00</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <p class="card-text">Marca X Y Z</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <p class="card-text">4AB7YT</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <p class="card-text subValorTotal" id = "valorTotalSub_0">R$ 25.900,00</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body" style = "margin-left: 12px;">
+                                        <!-- Botões de incremento e decremento -->
+                                        <button onclick="decrementarQuantidade(this)" class="btn btn-sm btn-danger btn-decremento">-</button>
+                                        <span class="card-text" id="quantidade">1</span>
+                                        <button onclick="incrementarQuantidade(this)" class="btn btn-sm btn-success btn-incremento">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card linhas card1">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="card-body">
+                                        <p class="card-text">Concreto</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <p class="card-text" id = "subValor">R$ 25.900,00</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <p class="card-text">Marca X Y Z</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <p class="card-text">4AB7YT</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <p class="card-text subValorTotal" id = "valorTotalSub_1">R$ 25.900,00</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body" style = "margin-left: 12px;">
+                                        <!-- Botões de incremento e decremento -->
+                                        <button onclick="decrementarQuantidade(this)" class="btn btn-sm btn-danger btn-decremento">-</button>
+                                        <span class="card-text" id="quantidade">1</span>
+                                        <button onclick="incrementarQuantidade(this)" class="btn btn-sm btn-success btn-incremento">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card linhas card1">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="card-body">
+                                        <p class="card-text">Concreto</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <p class="card-text" id = "subValor">R$ 25.900,00</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <p class="card-text">Marca X Y Z</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <p class="card-text">4AB7YT</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <p class="card-text subValorTotal" id = "valorTotalSub_2">R$ 25.900,00</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body" style = "margin-left: 12px;">
+                                        <!-- Botões de incremento e decremento -->
+                                        <button onclick="decrementarQuantidade(this)" class="btn btn-sm btn-danger btn-decremento">-</button>
+                                        <span class="card-text" id="quantidade">1</span>
+                                        <button onclick="incrementarQuantidade(this)" class="btn btn-sm btn-success btn-incremento">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-start align-items-center">
+                    <button class="btn btn-success" id="btnCadastrarProduto" data-title="Edit" data-toggle="modal" style= "margin-top: 15px;"
+                    data-target="#edit">Cadastrar produto</button>
+                    <button class="btn btn-success" id="btn_salvar" style= "margin-top: 15px; margin-left: 15px;">Salvar alterações</button>
+                </div>
+            </div>
+            <!-- Tabela resumo dos preços -->
+            <div class="col-md-3">
+                <div class="card mt_custom">
+                    <h4 style = "margin: 20px;">Preços</h4>
+                    <div class="row row_resumo" style = "margin-top: 12px;">
+                        <div class="col text-start">
+                            <div class = "mt-1">
+                                <p class="fw-bold lines_custom">Materiais</p>
+                            </div>
+                        </div>
+                        <div class="col text-end">
+                            <div class = "mt-1">
+                                <p class="fw-bold lines_custom preco_resumo">R$ 0000,00</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row_resumo">
+                        <div class="col text-start">
+                            <div class = "mt-1">
+                                <p class="fw-bold lines_custom">Mão de obra</p>
+                            </div>
+                        </div>
+                        <div class="col text-end">
+                            <div class = "mt-1">
+                                <p class="fw-bold lines_custom preco_resumo">R$ 0000,00</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row_resumo">
+                        <div class="col text-start">
+                            <div class = "mt-1">
+                                <p class="fw-bold lines_custom">Equipamentos</p>
+                            </div>
+                        </div>
+                        <div class="col text-end">
+                            <div class = "mt-1">
+                                <p class="fw-bold lines_custom preco_resumo">R$ 0000,00</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row_resumo">
+                        <div class="col text-start">
+                            <div class = "mt-1">
+                                <p class="fw-bold lines_custom">Licenças e Taxas</p>
+                            </div>
+                        </div>
+                        <div class="col text-end">
+                            <div class = "mt-1">
+                                <p class="fw-bold lines_custom preco_resumo">R$ 0000,00</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row_resumo">
+                        <div class="col text-start">
+                            <div class = "mt-1">
+                                <p class="fw-bold lines_custom">Tecnologia e Softwares</p>
+                            </div>
+                        </div>
+                        <div class="col text-end">
+                            <div class = "mt-1">
+                                <p class="fw-bold lines_custom preco_resumo">R$ 0000,00</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row_resumo row_total mt-auto">
+                        <div class="col">
+                            <div class = "mt-1">
+                                <p class="fw-bold lines_custom">TOTAL</p>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class = "mt-1">
+                                <p class="fw-bold lines_custom preco_total" style = "margin-left: -7px;">R$ 0000,00</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-success btn-orcamento mt-4">GERAR ORÇAMENTO</button>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+            <div class="overlay" style="z-index: 9999; border-radius: 10px;">
+                <div class="card">
+                    <div id="lottie1"></div>
+                </div>
+            </div>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title custom_align" style="font-weight: 700" id="Heading">CADASTRAR NOVO ITEM</h4>
+                    <button type="button" class="close btn-close btn-close-modal" data-dismiss="modal" aria-hidden="true"></button>
+                </div>
+                <div class="modal-body" style="padding: 30px;">
+                    <div class="row col-md-12">
+                        <div class="col-md-6 form-group">
+                            <label>Categoria</label>
+                            <select id="modalCategoria" class="form-control">
+                            </select>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Produto</label>
+                            <input id="modalProduto" class="form-control">
+                            </input>
+                        </div>
+                    </div>
+                    <div class="row col-md-12">
+                        <div class="col-md-6 form-group">
+                            <label>Descrição</label>
+                            <input id="modalDescricao" class="form-control">
+                            </input>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Valor</label>
+                            <input id="modalValor" class="form-control">
+                            </input>
+                        </div>
+                    </div>
+                    <div class="row col-md-12" id ="rowContainer">
+                    </div>
+                </div>
+                <div class="modal-footer ">
+                    <button type="button" id="btnAdicionarItem" class="btn btn-success btn-lg"
+                        style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> ADICIONAR ITEM</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+</body>
+<script src="script.js"></script>
+</html>
